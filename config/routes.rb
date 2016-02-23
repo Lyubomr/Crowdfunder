@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+
+  get 'sessions/create'
+
+  get 'sessions/destroy'
+
+  get 'users_controller/new'
+
+  get 'users_controller/create'
+
   root 'projects#index'
   resources :projects
 

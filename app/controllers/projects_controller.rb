@@ -1,25 +1,31 @@
 class ProjectsController < ApplicationController
-  def index
-    @projects = Project.all
-  end
-
-  def new
-    @project = Project.new
-  end
-
-  def create
-    @project = Project.new(project_params)
-
-    if @project.save
-      redirect_to projects_path, notice: "Project successfully created!"
-    else
-      render :new
+    def index
+      @projects = Project.all
     end
-  end
 
-  private
-  def project_params
-    params.require(:project).permit(:title, :description, :goal, :end_date)
-  end
+    def new
+      # if current_user.admin? || current_user.vetted?
+      @project = Project.new
+      # else
+      # redirect_to root_path
+      # end
+    end
+
+    def create
+      @project = Project.new(project_params)
+
+      if @project.save
+        redirect_to projects_path, notice: "Project successfully created!"
+      else
+        render :new
+      end
+    end
+
+    private
+    def project_params
+      params.require(:project)
+            .permit(:title, :description, :goal, :end_date,
+             rewards_attributes: [:title, :description, :amount, :_destroy])
+    end
 
 end

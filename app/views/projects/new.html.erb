@@ -21,6 +21,20 @@
     <%= f.date_field :end_date %>
   </div></br>
 
+  <h2>Rewards</h2>
+
+  <div id="rewards">
+  <%= f.fields_for :rewards do |reward_fields| %>
+    <!-- Delete: <%= reward_fields.check_box :_destroy %> -->
+    <%= render 'reward_fields', f: rewards_fields %>
+    <% end %>
+
+    <div class="links">
+      <%= link_to_add_association "Add Reward", f, :rewards %>
+    </div>
+    <br>
+  </div>
+
   <div class="field">
     <%= f.submit "Submit" %>
   </div></br>
