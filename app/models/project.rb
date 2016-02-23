@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
   has_many :rewards
 
-  accepts_nested_attr_for :rewards
+  accepts_nested_attributes_for :rewards
 end
