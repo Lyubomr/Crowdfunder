@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     if @user.save
       auto_login(@user)
       redirect_to projects_url ## url?
+      flash[:notice] = "Account created!"
     else
       render :new
     end
