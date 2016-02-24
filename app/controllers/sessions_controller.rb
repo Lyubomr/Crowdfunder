@@ -6,8 +6,10 @@ class SessionsController < ApplicationController
   # Actual action of loggin in.
   def create
     if @user = login(params[:email], params[:password])
-      redirect_back_or_to(:users, notice: 'Login succesfful!')
+      redirect_back_or_to(projects_path, notice: 'Login successful!')
       # redirect_back_or_to Remebers the page you were on before login and takes you there
+      # to this without sorcery, you'd need to store the info in a cookie through the session hash
+      # Anytime you want to be able to access a cookie, it's through the sessions hash.
    else
       flash.now[:alert] = 'Login failed'
       render action: :new
@@ -16,6 +18,6 @@ class SessionsController < ApplicationController
   # Log out
   def destroy
     logout
-    redirect_to(:users, notice: 'Logged out!')
+    redirect_to projects_path
   end
 end

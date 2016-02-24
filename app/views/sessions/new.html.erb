@@ -1,6 +1,18 @@
-<h1>Sessions#new</h1>
 <h1>Login</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', user_sessions_path %>
+<!-- Use a form_tag instead of a form_for because you don't want to store in a DB just in a session hash
+We just want to pass the information from the user to the server -->
+<%= form_tag sessions_path, :method => :post do %>
+<!-- Must specify that the method is a :post not a :get so the info is passed in the body of the request
+or else it would be passed in the URL -->
+  <div class="field">
+    <%= label_tag :email %><br />
+    <%= text_field_tag :email %>
+  </div>
+  <div class="field">
+    <%= label_tag :password %><br />
+    <%= password_field_tag :password %>
+  </div>
+  <div class="actions">
+    <%= submit_tag "Login" %>
+  </div>
+<% end %>

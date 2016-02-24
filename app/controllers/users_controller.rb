@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
     if @user.save
       auto_login(@user)
-      redirect_to projects_path ## url?
+      redirect_to projects_url ## url?
     else
       render :new
     end
