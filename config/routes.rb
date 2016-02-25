@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
 
   root 'projects#index'
-  resources :projects
   resources :users
   resources :sessions
+  resources :projects do
+    # nest rewards into projects because rewards don't exist without projects.
+    # For every project that's created there's an associated ID for a reward
+    resources :rewards
+  end
 
   get 'login' => 'sessions#new', :as => :login
   post 'logout' => 'sessions#destroy', :as => :logout
