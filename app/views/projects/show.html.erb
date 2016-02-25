@@ -3,9 +3,19 @@
 
   <p><%= @project.description %></p>
 
-  <p> $ <%= @project.goal %></p>
+  <p> $<%= number_with_delimiter(@project.goal, :delimiter =>',') %></p>
 
   <p><%= @project.end_date %></p>
-  <p> <%= [@proect, @rewards] %></p>
+
+<div class="reward">
+  <% if @rewards.any? %>
+      <p><%= @rewards.each do |reward|%></p>
+      <p><%= reward.title %></p>
+      <p><%= reward.description %></p>
+      <p>$<%= number_with_delimiter(reward.amount, :delimiter => ',')%></p>
+    <% end %>
+  <% end %>
+</div>
+
 
 </div>
