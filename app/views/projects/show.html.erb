@@ -1,6 +1,10 @@
 <div class="project">
   <h2><%= @project.title %></h2></br>
 
+  <!-- <div class="project_image">
+    <%= image_tag @project.featured_image %>
+  </div> -->
+
   <p><%= @project.description %></p>
 
   <p> $<%= number_with_delimiter(@project.goal, :delimiter =>',') %></p>
@@ -8,8 +12,9 @@
   <p><%= @project.end_date %></p>
 
 <div class="reward">
+  <h2>Rewards</h2>
   <% if @rewards.any? %>
-      <p><%= @rewards.each do |reward|%></p>
+      <p><% @rewards.each do |reward|%></p>
       <p><%= reward.title %></p>
       <p><%= reward.description %></p>
       <p>$<%= number_with_delimiter(reward.amount, :delimiter => ',')%></p>
@@ -17,5 +22,8 @@
   <% end %>
 </div>
 
+  <% @rewards.each do |reward| %>
+    <% new_goal = @project.goal - reward.amount %>
+  <p> Updated ammount = <%= new_goal %> </p>
 
-</div>
+    <% end %>

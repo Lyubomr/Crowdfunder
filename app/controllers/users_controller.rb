@@ -9,7 +9,8 @@ class UsersController < ApplicationController
 
     if @user.save
       auto_login(@user)
-      redirect_to projects_url ## url?
+      UserMailer.welcome_email(@user).deliver_later # or deliver_now
+      redirect_to projects_url ## path?
       flash[:notice] = "Account created!"
     else
       render :new
