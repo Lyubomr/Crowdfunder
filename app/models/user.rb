@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   # The user has many rewards because of products.
   # Not to be confused with has_many :rewards which means the user created the rewards.
   has_many :rewards, through: :projects
+  has_many :tags, as: :tagable
   authenticates_with_sorcery!
 
   validates :password, length: { minimum: 8 }, if: -> { new_record? || changes["password"] }
@@ -10,4 +11,5 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true, if: -> { new_record? || changes["password"] }
 
   validates :email, uniqueness: true
+
 end
